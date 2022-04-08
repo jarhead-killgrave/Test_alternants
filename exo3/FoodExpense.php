@@ -1,10 +1,10 @@
 <?php
 
-class Expense
+class FoodExpense
 {
     private float $amount;
 
-    private string $description;
+    private $description;
 
     private \DateTime $happenedAt;
 
@@ -53,5 +53,9 @@ class Expense
     public function getParticipants(): array
     {
         return $this->participants;
+    }
+
+    function get_type() {
+        return 'FOOD';
     }
 }
