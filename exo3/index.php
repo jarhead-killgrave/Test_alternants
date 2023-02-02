@@ -1,12 +1,13 @@
 <?php
 
 require_once("User.php");
+require_once("Expense.php");
 require_once("DrinkExpense.php");
 require_once("FoodExpense.php");
 
 const RED_TEXT = "\e[0;30;31m";
 const GREEN_TEXT = "\e[0;30;32m";
-const WHITE_TEXT = "\e[0;30;31m";
+const WHITE_TEXT = "\e[0;37;40m";
 
 //User creation
 $balances = [];
@@ -27,11 +28,11 @@ $expenses[] = new DrinkExpense(6.50, 'Robert qui a finalement fini sa pinte et a
 $expenses[] = new FoodExpense(30, 'Cadeau de Robert et Marcel pour l\'anniv de Jean-Paul (un poulet)', new DateTime('14 june 2021'), $robert, [$robert, $marcel]);
 $expenses[] = new FoodExpense(54.99, 'Marcel a avancé la côte de boeuf de Robert', new DateTime('15 june 2021'), $marcel, [$robert]);
 
-try{
+try {
     echo(GREEN_TEXT . "Liste des dépenses" . PHP_EOL);
     echo(GREEN_TEXT . "==================" . PHP_EOL);
 
-    foreach($expenses as $expense) {
+    foreach ($expenses as $expense) {
         echo(sprintf(
             "%s - %s %s a payé %s€ (%s€ par participant) (%s)",
             $expense->getType() === 'TYPE_FOOD' ? "\u{1F37D}\u{FE0F}" : "\u{1F37A}",
@@ -42,7 +43,7 @@ try{
             $expense->getDescription()
         ).PHP_EOL);
 
-        foreach($users as $user) {
+        foreach ($users as $user) {
             $balances[$user->getFullname()] += $expense->getUserShare($user);
         }
     }
